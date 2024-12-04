@@ -41,7 +41,7 @@ function activate(context) {
     });
 
     // Register the command
-    const disposable = vscode.commands.registerCommand('ddpaths.helloWorld', function () {
+    const disposable = vscode.commands.registerCommand('ddpaths.openlink', function () {
         console.log('Starting disposable');
         vscode.window.showInformationMessage('Hello World from ddpaths!');
     });
@@ -61,7 +61,7 @@ function decorateEditor() {
     const timestampRegex = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} UTC/;
 
     text.split('\n').forEach((line, lineIndex) => {
-        const match = line.match(/\(.*?\)/);
+        const match = line.match(/\(([^:]+)/);
         if (timestampRegex.test(line) && match) {
             const clickableSection = match[0].split(' ')[0].slice(1); // Extract content
             const start = line.indexOf(match[0]);
@@ -69,12 +69,15 @@ function decorateEditor() {
                 new vscode.Position(lineIndex, start),
                 new vscode.Position(lineIndex, start + match[0].length)
             );
+
             decorations.push({
                 range,
-                hoverMessage: `Click to view ${clickableSection}`,
+                hoverMessage: `Click to view https://github.com/DataDog/datadog-agent/blob/main/${clickableSection}`,
             });
         }
     });
+
+
 
     // Apply decorations
     editor.setDecorations(decorationType, decorations);

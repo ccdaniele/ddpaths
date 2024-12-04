@@ -13,8 +13,8 @@
   "main": "./extension.js",
   "contributes": {
     "commands": [{
-      "command": "ddpaths.helloWorld",
-      "title": "Hello World"
+      "command": "ddpaths.openLink",
+      "title": "Open Link"
     }]
   },
   "scripts": {
