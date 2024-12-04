@@ -16,13 +16,17 @@ function activate(context) {
     });
 
     // Register event listeners
-    // let openListener = vscode.workspace.onDidOpenTextDocument((document) => {
-    //     if (document.fileName.endsWith('g')) {
-    //         decorateEditor();
-    //     }
-    // });
+	// let openListener = vscode.window.onDidChangeActiveTextEditor((editor) => {
+	// 	if (editor) { // Check if an active editor is available
+	// 		console.log('from openListener', editor.document.fileName);
+	// 		// if (editor.document.fileName.endsWith('g')) {
+	// 		//     decorateEditor();
+	// 		// }
+	// 	}
+	// });
 
-    // let changeListener = vscode.workspace.onDidChangeTextDocument((event) => {
+    // let changeListener = vscode.workspace.onDidChangeTextDocument(() => {
+	// 	console.log ('from changeListener')
     //     const editor = vscode.window.activeTextEditor;
     //     if (editor && editor.document.fileName.endsWith('g')) {
     //         decorateEditor();
@@ -32,7 +36,7 @@ function activate(context) {
     console.log('Extension activated!');
 
     // Check currently open documents
-    vscode.workspace.textDocuments.forEach((document) => {
+    let openListener = vscode.workspace.textDocuments.forEach((document) => {
         console.log('Already open:', document.fileName);
 		if (document.fileName.endsWith('g')) {
             console.log('true')
@@ -46,7 +50,7 @@ function activate(context) {
         vscode.window.showInformationMessage('Hello World from ddpaths!');
     });
 
-    context.subscriptions.push(disposable);
+    context.subscriptions.push(disposable, openListener);
 }
 
 
