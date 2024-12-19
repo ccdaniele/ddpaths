@@ -48,7 +48,7 @@ function decorateEditor(editor) {
 
     const text = editor.document.getText();
     const decorations = [];
-    const timestampRegex = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} UTC/;
+    const timestampRegex = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} \b[A-Z]{2,5}\b/;
 
     let lineNumber;
 
